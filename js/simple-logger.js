@@ -94,6 +94,7 @@
             x: dim.w - obj.clientWidth,
             y: dim.h - obj.clientHeight
         };
+        e.preventDefault();
     };
     DragOrClick.prototype.setObjPos = function (newPos) {
         var obj = this.obj;
