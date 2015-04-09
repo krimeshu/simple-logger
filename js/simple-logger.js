@@ -129,7 +129,7 @@
         this.touchEndTime = new Date().getTime();
 
         var touchTimeSpan = this.touchEndTime - this.touchStartTime;
-        if (touchTimeSpan > 50 && touchTimeSpan < 250) {
+        if (touchTimeSpan > 25 && touchTimeSpan < 250) {
             this.trigger('click', e);
         }
     };

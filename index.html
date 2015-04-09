@@ -11,6 +11,10 @@
 <script type="text/javascript">
     UseSimpleLogger();
     console.log('Hello world!');
+    window.setInterval(function () {
+        var now = new Date();
+        console.log('Current Time: {1}', now.toLocaleString());
+    }, 1000);
 </script>
 <script type="text/javascript" src="js/script.js"></script>
 </body>
