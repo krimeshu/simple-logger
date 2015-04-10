@@ -219,6 +219,7 @@
         list.style.lineHeight = '20px';
         list.style.listStyle = 'none';
         list.style.overflowY = 'scroll';
+        list.style.webkitOverflowScrolling = 'touch';
         list.style.margin = '0';
         list.style.padding = '2px 6px';
         list.style.transform = list.style.webkitTransform = 'translate3d(0,-100%,0)';
