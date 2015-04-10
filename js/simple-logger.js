@@ -11,7 +11,10 @@
 
     // 初始化
     function init() {
-        if (document.body) {
+        if (initOK) {
+            return;
+        }
+        if (window.innerHeight && document.createElement && document.body && document.body.appendChild) {
             // 创建DOM
             createDOMs();
             // 绑定事件
@@ -26,12 +29,12 @@
     }
 
     // 缓存日志（DOM未创建好时）
-    function cacheItem(itemStr){
+    function cacheItem(itemStr) {
         cachedItems.push(itemStr);
     }
 
     // 处理缓存的日志
-    function handleCachedItems(){
+    function handleCachedItems() {
         if (cachedItems && cachedItems.length) {
             for (var i = 0, cachedItem; cachedItem = cachedItems[i]; i++) {
                 addLogItem(cachedItem);
@@ -200,6 +203,7 @@
         listBox.style.backgroundColor = 'rgba(0, 0, 0, .8)';
         listBox.style.opacity = 0;
         listBox.style.display = 'none';
+        listBox.style.transform = listBox.style.webkitTransform = 'translate3d(0,0,0)';
         listBox.style.transition = listBox.style.webkitTransition = 'opacity 500ms';
 
         list = document.createElement('ul');
@@ -207,29 +211,33 @@
         list.style.top = '0';
         list.style.left = '0';
         list.style.width = '100%';
-        list.style.height = '0%';
+        list.style.height = '80%';
+        list.style.boxSizing = 'border-box';
         list.style.backgroundColor = 'rgba(255, 255, 255, .7)';
         list.style.color = '#000000';
         list.style.fontSize = '12px';
-        list.style.lineHeight = '16px';
+        list.style.lineHeight = '20px';
         list.style.listStyle = 'none';
-        list.style.overflow = 'scroll';
+        list.style.overflowY = 'scroll';
         list.style.margin = '0';
-        list.style.padding = '0';
-        list.style.transition = list.style.webkitTransition = 'height 500ms';
+        list.style.padding = '2px 6px';
+        list.style.transform = list.style.webkitTransform = 'translate3d(0,-100%,0)';
+        list.style.transition = list.style.webkitTransition = 'all 500ms';
 
         btn = document.createElement('a');
         btn.style.position = 'fixed';
         btn.style.zIndex = 2147483647;
         btn.style.top = '10px';
-        btn.style.left = (dim.w - 10 - 42 - 4 * 2) + 'px';
-        btn.style.width = '42px';
-        btn.style.height = '42px';
+        btn.style.left = (dim.w - 10 - 50) + 'px';
+        btn.style.width = '50px';
+        btn.style.height = '50px';
+        btn.style.boxSizing = 'border-box';
         btn.style.backgroundColor = 'rgba(0, 0, 0, .6)';
         btn.style.border = '4px solid rgba(255, 255, 255, .2)'
         btn.style.borderRadius = '12px';
         btn.style.display = 'block';
         btn.style.color = '#FFFFFF';
+        btn.style.transform = btn.style.webkitTransform = 'translate3d(0,0,0)';
         //btn.innerHTML = '0';
         document.body.addEventListener('touchstart', function () {
             /* For bug: QQ浏览器中，手指移出窗口外后，无法再触发对象的touchstart事件问题 */
@@ -252,32 +260,33 @@
                 listBox.style.display = 'none';
             }
         };
+        var listStopEvent = function (e) {
+            e.stopPropagation();
+        };
         listBox.addEventListener('touchstart', function (e) {
             console.collapse();
             e.preventDefault(); // 防止放大、页面滚动等操作
         });
         listBox.addEventListener('webkitTransitionEnd', listBoxTransitionEnd);
         listBox.addEventListener('transitionend', listBoxTransitionEnd);
-        list.addEventListener('touchstart', function (e) {
-            e.stopPropagation();
-        });
+        list.addEventListener('touchstart', listStopEvent);
+        list.addEventListener('touchmove', listStopEvent);
     }
 
     // 展开日志列表
     console.expand = function () {
         listBox.style.display = 'block';
         getComputedStyle(listBox).display;
+        locateToEnd();
 
         listBox.style.opacity = 1;
-
-        list.style.height = '80%';
+        list.style.transform = list.style.webkitTransform = 'translate3d(0,0%,0)';
     };
 
     // 折叠日志列表
     console.collapse = function () {
-        list.style.height = '0%';
-
         listBox.style.opacity = 0;
+        list.style.transform = list.style.webkitTransform = 'translate3d(0,-100%,0)';
     };
 
     // 隐藏按键
@@ -287,7 +296,7 @@
 
     // 记录日志
     console['log'] = function (formatStr) {
-        var res = '&gt; ' + format(String(formatStr), arguments);
+        var res = '<b>&gt;</b> ' + format(String(formatStr), arguments);
         if (!initOK || !list) {
             cacheItem(res);
         } else {
@@ -308,7 +317,8 @@
         console.pretend();
     }
 
-    init();
+    //init();
+    window.addEventListener('load', init);  // 部分客户端内特殊情况处理
 
     window['SimpleLogger'] = console;
 }(window);
