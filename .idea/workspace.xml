@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="186aa9b9-09f6-4c98-9955-bbdcafdeb890" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/simple-logger.js" afterPath="$PROJECT_DIR$/js/simple-logger.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="simple-logger.iws" />
@@ -33,8 +30,8 @@
       <file leaf-file-name="simple-logger.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/simple-logger.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.734098" vertical-offset="4202" max-vertical-offset="7238">
-              <caret line="223" column="83" selection-start-line="223" selection-start-column="83" selection-end-line="223" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.68821687" vertical-offset="5984" max-vertical-offset="7216">
+              <caret line="302" column="28" selection-start-line="302" selection-start-column="28" selection-end-line="302" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -221,8 +218,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/simple-logger.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.734098" vertical-offset="4202" max-vertical-offset="7238">
-          <caret line="223" column="83" selection-start-line="223" selection-start-column="83" selection-end-line="223" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.68821687" vertical-offset="5984" max-vertical-offset="7216">
+          <caret line="302" column="28" selection-start-line="302" selection-start-column="28" selection-end-line="302" selection-end-column="28" />
           <folding />
         </state>
       </provider>

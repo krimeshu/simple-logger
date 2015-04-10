@@ -301,7 +301,6 @@
             cacheItem(res);
         } else {
             addLogItem(res);
-            locateToEnd();
         }
     };
 
