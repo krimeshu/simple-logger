@@ -67,9 +67,17 @@
 
     // document.body未加载完前缓存起来的日志
     function addLogItem(itemStr) {
+        var loh = list.offsetHeight,
+            olsh = list.scrollHeight;
+
         var item = document.createElement('li');
         item.innerHTML = itemStr;
         list.appendChild(item);
+
+        var nlsh = list.scrollHeight; // iOS中拖动问题
+        if (olsh <= loh && nlsh > loh) {
+            list.scrollTop = 1;
+        }
     }
 
     var DragOrClick = function (obj) {
@@ -256,22 +264,41 @@
         btnDOC.on('click', function () {
             console.expand();
         });
+
+        // 动画结束时根据透明度情况隐藏外框
         var listBoxTransitionEnd = function () {
             if (listBox.style.opacity == 0) {
                 listBox.style.display = 'none';
             }
         };
-        var listStopEvent = function (e) {
-            e.stopPropagation();
-        };
-        listBox.addEventListener('touchstart', function (e) {
-            console.collapse();
-            e.preventDefault(); // 防止放大、页面滚动等操作
-        });
         listBox.addEventListener('webkitTransitionEnd', listBoxTransitionEnd);
         listBox.addEventListener('transitionend', listBoxTransitionEnd);
-        list.addEventListener('touchstart', listStopEvent);
-        list.addEventListener('touchmove', listStopEvent);
+
+        // 阻止内部高度不够时，整个页面被拖动（iOS）
+        var checkScrollable = function (e) {
+            if (list.scrollHeight <= list.offsetHeight) {
+                e.preventDefault();
+            }
+            e.stopPropagation();
+        };
+        list.addEventListener('touchstart', checkScrollable);
+        list.addEventListener('touchmove', checkScrollable);
+
+        // 阻止表格外框点击、拖动时整个页面的滚动
+        var stopAndPrevent = function (e) {
+            e.stopPropagation();
+            e.preventDefault(); // 防止放大、页面滚动等操作
+        };
+        listBox.addEventListener('touchstart', function (e) {
+            var listRect = list.getBoundingClientRect();
+            var touchPos = DragOrClick.getTouchPos(e);
+            if (touchPos && (touchPos.x < listRect.left || touchPos.x > listRect.right ||
+                touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
+                console.collapse();
+            }
+            stopAndPrevent(e);
+        });
+        listBox.addEventListener('touchmove', stopAndPrevent);
     }
 
     // 展开日志列表
