@@ -1,5 +1,7 @@
 /**
  * Created by Grayson Rex on 2015/4/9.
+ * Version: 1.01
+ * Modify: 2015/5/14
  */
 ~function (window) {
     var _console = null, console = {};
@@ -47,7 +49,11 @@
     function format(formatStr, args) {
         var reg = /{(\d+)}/gm;
         var res = formatStr.replace(reg, function (match, name) {
-            return args[~~name];
+            var value = args[~~name];
+            if (typeof(value) != 'string') {
+                value = JSON.stringify(value);
+            }
+            return value;
         });
         return res.replace(/{{/g, '{').replace(/}}/, '}');
     }
@@ -256,6 +262,10 @@
         document.body.appendChild(btn);
         listBox.appendChild(list);
         document.body.appendChild(listBox);
+
+        if (console._hideBtn) {
+            console.hideBtn();
+        }
     }
 
     // 绑定对象相关事件
@@ -319,12 +329,19 @@
 
     // 隐藏按键
     console.hideBtn = function () {
-        btn.style.display = 'none';
+        if (btn) {
+            btn.style.display = 'none';
+        } else {
+            console._hideBtn = true;
+        }
     };
 
     // 记录日志
     console['log'] = function (formatStr) {
-        var res = '<b>&gt;</b> ' + format(String(formatStr), arguments);
+        if (typeof(formatStr) != 'string') {
+            formatStr = JSON.stringify(formatStr);
+        }
+        var res = '<b>&gt;</b> ' + format(formatStr, arguments);
         if (!initOK || !list) {
             cacheItem(res);
         } else {
