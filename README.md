@@ -14,6 +14,8 @@
 
 具体效果可参考`index.html`。
 
+![效果图](/Moonshell/simple-logger/blob/master/img/simple-logger.png?raw=true)
+
 ## 附：
 
 正式环境下屏蔽呼出按键的方式，只需要在引入js文件后，判断环境再调用`SimpleLogger.hideBtn()`即可，例子：
