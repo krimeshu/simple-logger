@@ -50,7 +50,7 @@
         this.step = 0;  // 当前动画帧
         this.dropOver = false;  // 是否飘落结束
 
-        console.log('New Leaf {{ from: ({1}, {2}), to: ({3}, {4}), speed: {5}, size: {6} }}',
+        console.log('New Leaf {from: (%d, %d), to: (%d, %d), speed: %d, size: %d}',
             this.ox, this.oy, this.dx, this.dy, this.speed, this.size);
     }
 
