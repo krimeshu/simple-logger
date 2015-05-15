@@ -14,7 +14,7 @@
 
 具体效果可参考`index.html`。
 
-![效果图](/Moonshell/simple-logger/blob/master/img/simple-logger.png?raw=true)
+![效果图](https://github.com/Moonshell/simple-logger/blob/master/img/simple-logger.png?raw=true)
 
 ## 附：
 
