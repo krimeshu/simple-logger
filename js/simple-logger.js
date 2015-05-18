@@ -1,6 +1,6 @@
 /**
  * Created by Grayson Rex on 2015/4/9.
- * Version: 2.00
+ * Version: 2.01
  * Modify: 2015/5/15
  */
 ~function (window) {
@@ -313,7 +313,7 @@
 
         list = document.createElement('ul');
         list.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 80%; box-sizing: border-box; background-color: rgba(255,255,255,.7); color: black; ' +
-        'margin: 0; padding: 2px 6px; font-size: 12px; line-height: 20px; list-style: none; overflow-y: scroll; -webkit-overflow-scrolling: touch;' +
+        'margin: 0; padding: 2px 6px; font-size: 12px; line-height: 20px; list-style: none; word-break: break-all; overflow-y: scroll; -webkit-overflow-scrolling: touch;' +
         'transition: transform 400ms; -webkit-transition: -webkit-transform 400ms;';
         list.style.transform = list.style.webkitTransform = 'translate3d(0,-100%,0)';
 
@@ -516,7 +516,7 @@
             if (file.indexOf(path) == 0) {
                 file = file.length > path.length ? file.substring(path.length) : '(index)';
             }
-            posStr = !file ? posStr : '</span><span style="float:right; color: #555555; text-decoration: underline;">' + file + ': ' + line;
+            posStr = !file ? posStr : '</span><span style="float:right; color: #555555; text-decoration: underline;">' + file + ': ' + line + '</span><span style="clear: both; display: block; height: 0;">';
         }
         SimpleLogger.error(error['message'] + posStr);
     });
