@@ -1,7 +1,7 @@
 /**
  * Created by Grayson Rex on 2015/4/9.
- * Version: 2.01
- * Modify: 2015/5/15
+ * Version: 2.02
+ * Modify: 2015/5/26
  */
 ~function (window) {
     var _console = null, SimpleLogger = {};
@@ -33,6 +33,8 @@
             handleCachedItems();
 
             initOK = true;
+
+            window.removeEventListener('resize', init);
         } else {
             window.setTimeout(init, 10);
         }
@@ -321,6 +323,7 @@
         btn.style.cssText = 'position: fixed; z-index: 2147483647; top: 10px; left: ' + (dim.w - 10 - 50) + 'px; width: 50px; height: 50px; display: block;' +
         'box-sizing: border-box; background-color: rgba(0,0,0, .6); border: 4px solid rgba(255,255,255, .2); border-radius: 12px; color: white;';
         btn.style.transform = btn.style.webkitTransform = 'translate3d(0,0,0)';
+
         document.body.addEventListener('touchstart', function () {
             /* For bug: QQ浏览器中，手指移出窗口外后，无法再触发对象的touchstart事件问题 */
             //btn.innerHTML = ~~btn.innerHTML + 1;
@@ -503,7 +506,8 @@
     };
 
     //init();
-    window.addEventListener('load', init);  // 部分客户端内特殊情况处理
+    window.addEventListener('load', init);      // 部分客户端内特殊情况处理
+    window.addEventListener('resize', init);    // 部分客户端WebView内setTimeout无效处理
     window.addEventListener('error', function (error) {
         var line = error ['lineno'];
         var file = error['filename']
