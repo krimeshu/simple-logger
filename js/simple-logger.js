@@ -1,7 +1,7 @@
 /**
  * Created by Grayson Rex on 2015/4/9.
- * Version: 2.02
- * Modify: 2015/5/26
+ * Version: 2.03
+ * Last Modify: 2016/3/19
  */
 ~function (window) {
     var _console = null, SimpleLogger = {};
@@ -131,11 +131,11 @@
         var res = [];
         var formats = formatStr.split('%');
         res.push(formats[0]);
-        var offset = 1;
+        var offset = 1, arg;
         if (formats.length > 1) {
             for (var i = offset, f; f = formats[i]; i++, offset++) {
                 var type = f[0];
-                var arg = args[offset];
+                arg = args[offset];
                 switch (type) {
                     case '%':
                         res.push('%');
@@ -178,7 +178,9 @@
             }
         }
         for (var len = args.length; offset < len; offset++) {
-            res.push(' ' + JSON.stringify(args[offset]));
+            arg = args[offset];
+            res.push(' ');
+            res.push(typeof arg === 'string' ? arg : JSON.stringify(arg));
         }
         res = '<span>' + res.join('') + '</span>';
         res = res.replace(/\n/g, '<br/>');
@@ -308,20 +310,20 @@
 
         listBox = document.createElement('div');
         listBox.style.cssText = 'position: fixed; z-index: 2147483647; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.8);' +
-        'transition: opacity 400ms; -webkit-transition: opacity 400ms;';
+            'transition: opacity 400ms; -webkit-transition: opacity 400ms;';
         listBox.style.transform = listBox.style.webkitTransform = 'translate3d(0,0,0)';
         listBox.style.opacity = 0;
         listBox.style.display = 'none';
 
         list = document.createElement('ul');
         list.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 80%; box-sizing: border-box; background-color: rgba(255,255,255,.7); color: black; ' +
-        'margin: 0; padding: 2px 6px; font-size: 12px; line-height: 20px; list-style: none; word-break: break-all; overflow-y: scroll; -webkit-overflow-scrolling: touch;' +
-        'transition: transform 400ms; -webkit-transition: -webkit-transform 400ms;';
+            'margin: 0; padding: 2px 6px; font-size: 12px; line-height: 20px; list-style: none; word-break: break-all; overflow-y: scroll; -webkit-overflow-scrolling: touch;' +
+            'transition: transform 400ms; -webkit-transition: -webkit-transform 400ms; text-align: left;';
         list.style.transform = list.style.webkitTransform = 'translate3d(0,-100%,0)';
 
         btn = document.createElement('a');
-        btn.style.cssText = 'position: fixed; z-index: 2147483647; top: 10px; left: ' + (dim.w - 10 - 50) + 'px; width: 50px; height: 50px; display: block;' +
-        'box-sizing: border-box; background-color: rgba(0,0,0, .6); border: 4px solid rgba(255,255,255, .2); border-radius: 12px; color: white;';
+        btn.style.cssText = 'position: fixed; z-index: 2147483647; top: 360px; left: 20px; width: 50px; height: 50px; display: block;' +
+            'box-sizing: border-box; background-color: rgba(0,0,0, .6); border: 4px solid rgba(255,255,255, .2); border-radius: 12px; color: white;';
         btn.style.transform = btn.style.webkitTransform = 'translate3d(0,0,0)';
 
         document.body.addEventListener('touchstart', function () {
