@@ -1,0 +1,20 @@
+{
+  "name": "simple-logger",
+  "version": "0.1.0",
+  "fcOpt": {
+    "scOpt": {},
+    "pcOpt": {},
+    "alOpt": {},
+    "upOpt": {},
+    "tasks": [
+      "prepare_build",
+      "replace_const",
+      "compile_sass",
+      "join_include",
+      "prefix_crafter",
+      "do_dist",
+      "do_upload"
+    ]
+  },
+  "watchToRebuilding": false
+}
