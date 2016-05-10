@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=320"/>
+    <title>摇一摇 - logger测试</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" src="js/simple-logger.js"></script>
+    <script type="text/javascript">
+        console.log('window.innerHeight: %d', window.innerHeight);
+    </script>
+</head>
+<body>
+<script type="text/javascript">
+    window.setTimeout(function () {
+        asdf();
+    }, 1000);
+    console.log('Hello world!');
+    window.setInterval(function () {
+        var now = new Date();
+        console.log('Current Time: %c%s', 'color: green;', now.toLocaleString());
+    }, 5000);
+</script>
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

@@ -116,7 +116,7 @@
             checkAllImgsOK();
         };
     bgImg.onload = bgImgLoaded;
-    bgImg.src = isOnline ? "#link('{PROJECT}/img/bg.jpg')" : 'img/bg.jpg';
+    bgImg.src = isOnline ? "#link('{PROJECT}/images/bg.jpg')" : 'images/bg.jpg';
 
     /**
      * 根据画布尺寸计算背景尺寸，作为绘制时的参数
@@ -163,7 +163,7 @@
             checkAllImgsOK();
         };
     leavesImg.onload = leavesImgLoaded;
-    leavesImg.src = isOnline ? "#link('{PROJECT}/img/leaves.png')" : 'img/leaves.png';
+    leavesImg.src = isOnline ? "#link('{PROJECT}/images/leaves.png')" : 'images/leaves.png';
 
     /**
      * 摇动手机时生成Leaf对象
