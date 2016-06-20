@@ -1,6 +1,6 @@
 # Simple Logger
 
-> Version: 2.03
+> Version: 3.0.1
 
 ## 说明
 
