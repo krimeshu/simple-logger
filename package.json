@@ -13,11 +13,12 @@
       "judge": "function uploadJudge(response) {\n    return /^上传成功/.test(response);\n}"
     },
     "tasks": [
+      "compile_sass",
       "prepare_build",
       "replace_const",
-      "compile_sass",
       "prefix_crafter",
       "join_include",
+      "run_browserify",
       "do_dist"
     ],
     "innerSrcDir": "src",
