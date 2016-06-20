@@ -72,11 +72,6 @@ var Delayer = require('./simple-logger/delayer.js'),
                 SimpleLogger.collapse();
             }
             e.stopPropagation();
-            e.preventDefault();
-        });
-        box.addEventListener('touchmove', function (e) {
-            e.stopPropagation();
-            e.preventDefault();
         });
         Delayer.execQueue(Logger);
         Delayer.clearQueue();
