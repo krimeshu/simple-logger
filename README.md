@@ -14,7 +14,7 @@
 
 具体效果可参考`index.html`。
 
-![效果图](https://github.com/Moonshell/simple-logger/blob/master/img/simple-logger.png?raw=true)
+![效果图](https://github.com/Moonshell/simple-logger/blob/master/preview.png?raw=true)
 
 ## 附：
 
@@ -37,6 +37,9 @@
 
 ## 更新内容
 
+> 3.0.1
+模块化重构，使用新的UI风格，支持object对象展开预览。
+>
 > 2.03
 > 修复字符串附加参数的多余引号问题。
 
