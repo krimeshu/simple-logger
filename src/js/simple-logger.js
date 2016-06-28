@@ -59,12 +59,17 @@ var Delayer = require('./simple-logger/delayer.js'),
             SimpleLogger.expand();
         });
 
-        box.addEventListener('click', function (e) {
-            if (e.target === box) {
-                Logger.collapse();
-            }
-        });
         box.addEventListener('touchstart', function (e) {
+            var listRect = list.getBoundingClientRect(),
+                scrollTop = (document.documentElement.scrollTop || document.body.scrollTop),
+                scrollLeft = (document.documentElement.scrollLeft || document.body.scrollLeft);
+            var touchPos = DragOrClick.getTouchPos(e);
+            touchPos.x -= scrollLeft;
+            touchPos.y -= scrollTop;
+            if (touchPos && (touchPos.x < listRect.left || touchPos.x > listRect.right ||
+                touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
+                SimpleLogger.collapse();
+            }
             e.stopPropagation();
         });
         Delayer.execQueue(Logger);
