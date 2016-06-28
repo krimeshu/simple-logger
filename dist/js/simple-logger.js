@@ -64,12 +64,6 @@ var Delayer = require('./simple-logger/delayer.js'),
             }
         });
         box.addEventListener('touchstart', function (e) {
-            var listRect = list.getBoundingClientRect();
-            var touchPos = DragOrClick.getTouchPos(e);
-            if (touchPos && (touchPos.x < listRect.left || touchPos.x > listRect.right ||
-                touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
-                SimpleLogger.collapse();
-            }
             e.stopPropagation();
         });
         Delayer.execQueue(Logger);
