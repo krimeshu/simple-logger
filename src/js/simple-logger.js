@@ -2,8 +2,8 @@
 
 /**
  * Created by krimeshu on 2016/6/20.
- * Version: 3.0.1
- * Last Modify: 2016/6/20
+ * Version: {VERSION}
+ * Last Modify: 2016/7/1
  */
 var Delayer = require('./simple-logger/delayer.js'),
     Logger = require('./simple-logger/logger.js'),
@@ -25,7 +25,9 @@ var Delayer = require('./simple-logger/delayer.js'),
 
     function initLoggerDelayer() {
         window.console = window.SimpleLogger = Delayer.create([
-            'log', 'info', 'warn', 'error', 'clear', 'useId', 'genUniqueId'
+            'log', 'info', 'warn', 'error',
+            'clear', 'useId', 'genUniqueId',
+            'expand', 'collapse', 'hideBtn', 'showBtn'
         ]);
     }
 
