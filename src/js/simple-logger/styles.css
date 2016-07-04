@@ -43,6 +43,7 @@
   .simple-logger-box .simple-logger-list {
     list-style: none;
     color: #cacaca;
+    text-align: left;
     word-break: break-all;
     font-size: 13px;
     font-family: Consolas, custom-font, sans-serif; }
