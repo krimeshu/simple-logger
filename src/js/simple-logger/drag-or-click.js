@@ -49,9 +49,10 @@ DragOrClick.prototype.touchStart = function (e) {
     this.touchStartTime = new Date().getTime();
     this.touchStartPos = this.touchEndPos = pos;
 
+    var oldRect = obj.getBoundingClientRect();
     this.oldPos = {
-        x: parseInt(getComputedStyle(obj).left, 10),
-        y: parseInt(getComputedStyle(obj).top, 10)
+        x: oldRect.left,
+        y: oldRect.top
     };
     var dim = DragOrClick.getViewportDimension(),
         rect = obj.getBoundingClientRect();
