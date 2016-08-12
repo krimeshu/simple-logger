@@ -29,7 +29,7 @@ var Delayer = {
         }
     },
     clearQueue: function () {
-        this._waitingQueue = {};
+        this._waitingQueue = [];
     }
 };
 
