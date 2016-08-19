@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * Created by krimeshu on 2016/6/20.
- * Version: 3.1.0
+ * Version: 3.1.1
  * Last Modify: 2016/8/19
  */
 var Delayer = require('./simple-logger/delayer.js'),
@@ -296,6 +296,7 @@ var JSONViewer = function (opts) {
         quoteKeys = opts.quoteKeys,
         theme = opts.theme,
         rowClass = ['json-viewer-row'];
+    this._allowHtml = false;
     this.indentSize = indentSize === undefined ? 14 : indentSize | 0;
     this.expand = expand | 0;
     this.quoteKeys = !!quoteKeys;
@@ -305,6 +306,12 @@ var JSONViewer = function (opts) {
 };
 
 JSONViewer.prototype = {
+    allowHtml: function () {
+        this._allowHtml = true;
+    },
+    preventHtml: function () {
+        this._allowHtml = false;
+    },
     _getUsefulDOM: function (unknown) {
         if (this._isDOM(unknown) ||
             (unknown.length && typeof(unknown.append) === 'function')) {
@@ -398,6 +405,7 @@ JSONViewer.prototype = {
             indentSize = this.indentSize | 0,
             expand = this.expand | 0,
             rowClass = this.rowClass || 'json-viewer-row',
+            allowHtml = this._allowHtml,
             isEmpty,
             collapseClass,
             child,
@@ -506,12 +514,19 @@ JSONViewer.prototype = {
             buffer.push('<div class="json-viewer-' + baseType + '">');
             if (baseType === 'string') {
                 buffer.push('"');
+                if (!allowHtml) {
+                    target = target.replace(/</g, '&lt;');
+                }
                 buffer.push(target.replace(/"/g, '\\"'));
                 buffer.push('"');
             } else if (baseType === 'stream') {
                 buffer.push('Stream');
             } else {
-                buffer.push(String(target));
+                target = String(target);
+                if (!allowHtml) {
+                    target = target.replace(/</g, '&lt;');
+                }
+                buffer.push(target);
             }
             buffer.push('</div>');
             if (_isLast) {
@@ -551,9 +566,11 @@ var Logger = {
     _allowHtml: false,
     allowHtml: function () {
         this._allowHtml = true;
+        this.jsonViewer.allowHtml();
     },
     preventHtml: function () {
         this._allowHtml = false;
+        this.jsonViewer.preventHtml();
     },
     bindConsole: function (console) {
         this._console = console;

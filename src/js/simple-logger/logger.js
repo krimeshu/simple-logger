@@ -12,9 +12,11 @@ var Logger = {
     _allowHtml: false,
     allowHtml: function () {
         this._allowHtml = true;
+        this.jsonViewer.allowHtml();
     },
     preventHtml: function () {
         this._allowHtml = false;
+        this.jsonViewer.preventHtml();
     },
     bindConsole: function (console) {
         this._console = console;

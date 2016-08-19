@@ -17,6 +17,7 @@ var JSONViewer = function (opts) {
         quoteKeys = opts.quoteKeys,
         theme = opts.theme,
         rowClass = ['json-viewer-row'];
+    this._allowHtml = false;
     this.indentSize = indentSize === undefined ? 14 : indentSize | 0;
     this.expand = expand | 0;
     this.quoteKeys = !!quoteKeys;
@@ -26,6 +27,12 @@ var JSONViewer = function (opts) {
 };
 
 JSONViewer.prototype = {
+    allowHtml: function () {
+        this._allowHtml = true;
+    },
+    preventHtml: function () {
+        this._allowHtml = false;
+    },
     _getUsefulDOM: function (unknown) {
         if (this._isDOM(unknown) ||
             (unknown.length && typeof(unknown.append) === 'function')) {
@@ -119,6 +126,7 @@ JSONViewer.prototype = {
             indentSize = this.indentSize | 0,
             expand = this.expand | 0,
             rowClass = this.rowClass || 'json-viewer-row',
+            allowHtml = this._allowHtml,
             isEmpty,
             collapseClass,
             child,
@@ -227,12 +235,19 @@ JSONViewer.prototype = {
             buffer.push('<div class="json-viewer-' + baseType + '">');
             if (baseType === 'string') {
                 buffer.push('"');
+                if (!allowHtml) {
+                    target = target.replace(/</g, '&lt;');
+                }
                 buffer.push(target.replace(/"/g, '\\"'));
                 buffer.push('"');
             } else if (baseType === 'stream') {
                 buffer.push('Stream');
             } else {
-                buffer.push(String(target));
+                target = String(target);
+                if (!allowHtml) {
+                    target = target.replace(/</g, '&lt;');
+                }
+                buffer.push(target);
             }
             buffer.push('</div>');
             if (_isLast) {
