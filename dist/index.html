@@ -22,10 +22,12 @@
     <title>Simple Logger</title>
     <script src="js/simple-logger.js"></script>
     <script>
+        //SimpleLogger.allowHtml();
+
         console.log('Hello', 'world!');
         console.info('现在时间：%c', 'color: white;', new Date());
         console.warn('SimpleLogger 默认会替换 window.console。');
-        console.log('<hr/>');
+        console.log('%c', 'display: block; border-top: 1px solid #999;');
         console.log('打印Object：', {
             title: '面朝大海，春暖花开',
             content: [
@@ -45,7 +47,7 @@
                 '我只愿面朝大海'
             ]
         });
-        console.log('<hr/>');
+        console.log('%c', 'display: block; border-top: 1px solid #999;');
         (function () {
             throw new Error('发生了一些错误。');
         })();

@@ -69,11 +69,3 @@
         color: white; }
     .simple-logger-box .simple-logger-list .json-holder {
       font-style: normal; }
-    .simple-logger-box .simple-logger-list .pos-str {
-      float: right;
-      color: #999;
-      text-decoration: underline; }
-    .simple-logger-box .simple-logger-list .clear {
-      clear: both;
-      display: block;
-      height: 0; }

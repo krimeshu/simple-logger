@@ -3,7 +3,7 @@
 /**
  * Created by krimeshu on 2016/6/20.
  * Version: {VERSION}
- * Last Modify: 2016/7/1
+ * Last Modify: 2016/8/19
  */
 var Delayer = require('./simple-logger/delayer.js'),
     Logger = require('./simple-logger/logger.js'),
@@ -27,7 +27,8 @@ var Delayer = require('./simple-logger/delayer.js'),
         window.console = window.SimpleLogger = Delayer.create([
             'log', 'info', 'warn', 'error',
             'clear', 'useId', 'genUniqueId',
-            'expand', 'collapse', 'hideBtn', 'showBtn'
+            'expand', 'collapse', 'hideBtn', 'showBtn',
+            'allowHtml', 'preventHtml'
         ]);
     }
 
@@ -82,19 +83,19 @@ var Delayer = require('./simple-logger/delayer.js'),
     function listenToError() {
         window.addEventListener('error', function (error) {
             var line = error ['lineno'];
-            var file = error['filename']
-            var posStr = '(' + line + ')';
+            var file = error['filename'];
+            var posStr = '([unknown_file]: ' + line + ')';
             if (file) {
                 file = file.substring(0, ((file.indexOf('?') + 1) || (file.indexOf('#') + 1) || (file.length + 1)) - 1);
                 var page = window.location.href;
                 page = page.substring(0, ((page.indexOf('?') + 1) || (page.indexOf('#') + 1) || (page.length + 1)) - 1);
                 var path = page.substring(0, page.lastIndexOf('/') + 1);
                 if (file.indexOf(path) == 0) {
-                    file = file.length > path.length ? file.substring(path.length) : '(index)';
+                    file = file.length > path.length ? file.substring(path.length) : '[index_file]';
                 }
-                posStr = !file ? posStr : '</span><span class="pos-str">' + file + ': ' + line + '</span><span class="clear">';
+                posStr = !file ? posStr : '(' + file + ': ' + line + ')';
             }
-            SimpleLogger.error(error['message'] + posStr);
+            SimpleLogger.error('%s%c%s', error['message'], 'color: #999;', posStr);
         });
     }
 

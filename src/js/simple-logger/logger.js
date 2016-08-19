@@ -9,6 +9,13 @@ var Logger = {
     logList: null,
     nextId: null,
     _console: null,
+    _allowHtml: false,
+    allowHtml: function () {
+        this._allowHtml = true;
+    },
+    preventHtml: function () {
+        this._allowHtml = false;
+    },
     bindConsole: function (console) {
         this._console = console;
     },
@@ -84,16 +91,15 @@ var Logger = {
         }
     },
     _format: function (args) {
-        var formatStr = args[0];
-        if (typeof formatStr !== 'string') {
-            formatStr = this._stringify(formatStr);
-        }
-        var res = [];
-        var formats = formatStr.split('%');
-        res.push(formats[0]);
+        var formatStr = this._stringify(args[0]),
+            formats = formatStr.split('%');
+
         var offset = 1,
             type,
             arg;
+
+        var res = [];
+        res.push(formats[0]);
         if (formats.length > 1) {
             for (var i = offset, f; f = formats[i]; i++, offset++) {
                 type = f[0];
@@ -103,7 +109,7 @@ var Logger = {
                         res.push('%');
                         break;
                     case 'c':
-                        res.push('</span><span style="' + arg + '">');
+                        res.push('</span><span style="' + this._stringify(arg) + '">');
                         break;
                     case 'd':
                     case 'i':
@@ -149,12 +155,16 @@ var Logger = {
         return res;
     },
     _stringify: function (arg) {
+        var allowHtml = this._allowHtml;
         if (arg instanceof Date) {
             return String(arg);
         }
         var type = typeof arg;
         switch (type) {
             case 'string':
+                if (!allowHtml) {
+                    arg = arg.replace(/</g, '&lt;');
+                }
                 return arg;
             case 'object':
                 return this.jsonViewer.toJSON(arg);

@@ -1,8 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * Created by krimeshu on 2016/6/20.
- * Version: 3.0.8
- * Last Modify: 2016/7/1
+ * Version: 3.1.0
+ * Last Modify: 2016/8/19
  */
 var Delayer = require('./simple-logger/delayer.js'),
     Logger = require('./simple-logger/logger.js'),
@@ -14,7 +14,7 @@ var Delayer = require('./simple-logger/delayer.js'),
 
     function initElements() {
         var tempBox = document.createElement('DIV');
-        tempBox.innerHTML = '<style type=\"text/css\">\r\n    .simple-logger-btn {\n  position: fixed;\n  z-index: 2147483647;\n  top: 40px;\n  left: 80%;\n  width: 25px;\n  height: 25px;\n  background-color: rgba(50, 50, 50, 0.2);\n  border: 5px solid rgba(0, 0, 0, 0.2);\n  border-radius: 10px; }\n\n.simple-logger-box {\n  position: fixed;\n  z-index: 2147483647;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(255, 255, 255, 0.8);\n  -webkit-transition: opacity 400ms ease, visibility 400ms ease;\n  transition: opacity 400ms ease, visibility 400ms ease;\n  opacity: 0;\n  visibility: hidden; }\n  .simple-logger-box.show {\n    opacity: 1;\n    visibility: visible; }\n  .simple-logger-box .simple-logger-list {\n    position: absolute;\n    z-index: 2147483647;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 80%;\n    background-color: rgba(0, 0, 0, 0.8);\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    overflow: auto;\n    -webkit-overflow-scrolling: touch;\n    -webkit-transition: -webkit-transform 400ms ease;\n    transition: -webkit-transform 400ms ease;\n    transition: transform 400ms ease;\n    transition: transform 400ms ease, -webkit-transform 400ms ease;\n    -webkit-transform: translate3d(0, -100%, 0);\n            transform: translate3d(0, -100%, 0); }\n  .simple-logger-box.show .simple-logger-list {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  .simple-logger-box .simple-logger-list {\n    list-style: none;\n    color: #cacaca;\n    text-align: left;\n    word-break: break-all;\n    font-size: 13px;\n    font-family: Consolas, custom-font, sans-serif; }\n    .simple-logger-box .simple-logger-list li {\n      margin: 4px 8px;\n      line-height: 1.5; }\n    .simple-logger-box .simple-logger-list a {\n      color: #ffffff; }\n    .simple-logger-box .simple-logger-list hr {\n      border-color: #cacaca; }\n    .simple-logger-box .simple-logger-list .literal {\n      color: #cacaca; }\n    .simple-logger-box .simple-logger-list .info {\n      color: #74aa04; }\n    .simple-logger-box .simple-logger-list .warn {\n      color: #cccc81; }\n    .simple-logger-box .simple-logger-list .error {\n      color: #a70334; }\n    .simple-logger-box .simple-logger-list .options-confirm {\n      font-style: normal;\n      color: #cacaca; }\n      .simple-logger-box .simple-logger-list .options-confirm .options-link.ok, .simple-logger-box .simple-logger-list .options-confirm .options-link.cancel {\n        color: white; }\n    .simple-logger-box .simple-logger-list .json-holder {\n      font-style: normal; }\n    .simple-logger-box .simple-logger-list .pos-str {\n      float: right;\n      color: #999;\n      text-decoration: underline; }\n    .simple-logger-box .simple-logger-list .clear {\n      clear: both;\n      display: block;\n      height: 0; }\n\r\n</style>\r\n<a class=\"simple-logger-btn\"></a>\r\n<div class=\"simple-logger-box\">\r\n    <ul class=\"simple-logger-list\"></ul>\r\n</div>\r\n';
+        tempBox.innerHTML = '<style type=\"text/css\">\r\n    .simple-logger-btn {\n  position: fixed;\n  z-index: 2147483647;\n  top: 40px;\n  left: 80%;\n  width: 25px;\n  height: 25px;\n  background-color: rgba(50, 50, 50, 0.2);\n  border: 5px solid rgba(0, 0, 0, 0.2);\n  border-radius: 10px; }\n\n.simple-logger-box {\n  position: fixed;\n  z-index: 2147483647;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(255, 255, 255, 0.8);\n  -webkit-transition: opacity 400ms ease, visibility 400ms ease;\n  transition: opacity 400ms ease, visibility 400ms ease;\n  opacity: 0;\n  visibility: hidden; }\n  .simple-logger-box.show {\n    opacity: 1;\n    visibility: visible; }\n  .simple-logger-box .simple-logger-list {\n    position: absolute;\n    z-index: 2147483647;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 80%;\n    background-color: rgba(0, 0, 0, 0.8);\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    overflow: auto;\n    -webkit-overflow-scrolling: touch;\n    -webkit-transition: -webkit-transform 400ms ease;\n    transition: -webkit-transform 400ms ease;\n    transition: transform 400ms ease;\n    transition: transform 400ms ease, -webkit-transform 400ms ease;\n    -webkit-transform: translate3d(0, -100%, 0);\n            transform: translate3d(0, -100%, 0); }\n  .simple-logger-box.show .simple-logger-list {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  .simple-logger-box .simple-logger-list {\n    list-style: none;\n    color: #cacaca;\n    text-align: left;\n    word-break: break-all;\n    font-size: 13px;\n    font-family: Consolas, custom-font, sans-serif; }\n    .simple-logger-box .simple-logger-list li {\n      margin: 4px 8px;\n      line-height: 1.5; }\n    .simple-logger-box .simple-logger-list a {\n      color: #ffffff; }\n    .simple-logger-box .simple-logger-list hr {\n      border-color: #cacaca; }\n    .simple-logger-box .simple-logger-list .literal {\n      color: #cacaca; }\n    .simple-logger-box .simple-logger-list .info {\n      color: #74aa04; }\n    .simple-logger-box .simple-logger-list .warn {\n      color: #cccc81; }\n    .simple-logger-box .simple-logger-list .error {\n      color: #a70334; }\n    .simple-logger-box .simple-logger-list .options-confirm {\n      font-style: normal;\n      color: #cacaca; }\n      .simple-logger-box .simple-logger-list .options-confirm .options-link.ok, .simple-logger-box .simple-logger-list .options-confirm .options-link.cancel {\n        color: white; }\n    .simple-logger-box .simple-logger-list .json-holder {\n      font-style: normal; }\n\r\n</style>\r\n<a class=\"simple-logger-btn\"></a>\r\n<div class=\"simple-logger-box\">\r\n    <ul class=\"simple-logger-list\"></ul>\r\n</div>\r\n';
         var elements = [].slice.call(tempBox.children, 0),
             element;
         for (var i = 0; element = elements[i]; i++) {
@@ -26,7 +26,8 @@ var Delayer = require('./simple-logger/delayer.js'),
         window.console = window.SimpleLogger = Delayer.create([
             'log', 'info', 'warn', 'error',
             'clear', 'useId', 'genUniqueId',
-            'expand', 'collapse', 'hideBtn', 'showBtn'
+            'expand', 'collapse', 'hideBtn', 'showBtn',
+            'allowHtml', 'preventHtml'
         ]);
     }
 
@@ -81,19 +82,19 @@ var Delayer = require('./simple-logger/delayer.js'),
     function listenToError() {
         window.addEventListener('error', function (error) {
             var line = error ['lineno'];
-            var file = error['filename']
-            var posStr = '(' + line + ')';
+            var file = error['filename'];
+            var posStr = '([unknown_file]: ' + line + ')';
             if (file) {
                 file = file.substring(0, ((file.indexOf('?') + 1) || (file.indexOf('#') + 1) || (file.length + 1)) - 1);
                 var page = window.location.href;
                 page = page.substring(0, ((page.indexOf('?') + 1) || (page.indexOf('#') + 1) || (page.length + 1)) - 1);
                 var path = page.substring(0, page.lastIndexOf('/') + 1);
                 if (file.indexOf(path) == 0) {
-                    file = file.length > path.length ? file.substring(path.length) : '(index)';
+                    file = file.length > path.length ? file.substring(path.length) : '[index_file]';
                 }
-                posStr = !file ? posStr : '</span><span class="pos-str">' + file + ': ' + line + '</span><span class="clear">';
+                posStr = !file ? posStr : '(' + file + ': ' + line + ')';
             }
-            SimpleLogger.error(error['message'] + posStr);
+            SimpleLogger.error('%s%c%s', error['message'], 'color: #999;', posStr);
         });
     }
 
@@ -547,6 +548,13 @@ var Logger = {
     logList: null,
     nextId: null,
     _console: null,
+    _allowHtml: false,
+    allowHtml: function () {
+        this._allowHtml = true;
+    },
+    preventHtml: function () {
+        this._allowHtml = false;
+    },
     bindConsole: function (console) {
         this._console = console;
     },
@@ -622,16 +630,15 @@ var Logger = {
         }
     },
     _format: function (args) {
-        var formatStr = args[0];
-        if (typeof formatStr !== 'string') {
-            formatStr = this._stringify(formatStr);
-        }
-        var res = [];
-        var formats = formatStr.split('%');
-        res.push(formats[0]);
+        var formatStr = this._stringify(args[0]),
+            formats = formatStr.split('%');
+
         var offset = 1,
             type,
             arg;
+
+        var res = [];
+        res.push(formats[0]);
         if (formats.length > 1) {
             for (var i = offset, f; f = formats[i]; i++, offset++) {
                 type = f[0];
@@ -641,7 +648,7 @@ var Logger = {
                         res.push('%');
                         break;
                     case 'c':
-                        res.push('</span><span style="' + arg + '">');
+                        res.push('</span><span style="' + this._stringify(arg) + '">');
                         break;
                     case 'd':
                     case 'i':
@@ -687,12 +694,16 @@ var Logger = {
         return res;
     },
     _stringify: function (arg) {
+        var allowHtml = this._allowHtml;
         if (arg instanceof Date) {
             return String(arg);
         }
         var type = typeof arg;
         switch (type) {
             case 'string':
+                if (!allowHtml) {
+                    arg = arg.replace(/</g, '&lt;');
+                }
                 return arg;
             case 'object':
                 return this.jsonViewer.toJSON(arg);
