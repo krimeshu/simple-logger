@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * Created by krimeshu on 2016/6/20.
- * Version: 3.1.1
+ * Version: 3.2.1
  * Last Modify: 2016/8/19
  */
 var Delayer = require('./simple-logger/delayer.js'),
@@ -14,7 +14,7 @@ var Delayer = require('./simple-logger/delayer.js'),
 
     function initElements() {
         var tempBox = document.createElement('DIV');
-        tempBox.innerHTML = '<style type=\"text/css\">\r\n    .simple-logger-btn {\n  position: fixed;\n  z-index: 2147483647;\n  top: 40px;\n  left: 80%;\n  width: 25px;\n  height: 25px;\n  background-color: rgba(50, 50, 50, 0.2);\n  border: 5px solid rgba(0, 0, 0, 0.2);\n  border-radius: 10px; }\n\n.simple-logger-box {\n  position: fixed;\n  z-index: 2147483647;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(255, 255, 255, 0.8);\n  -webkit-transition: opacity 400ms ease, visibility 400ms ease;\n  transition: opacity 400ms ease, visibility 400ms ease;\n  opacity: 0;\n  visibility: hidden; }\n  .simple-logger-box.show {\n    opacity: 1;\n    visibility: visible; }\n  .simple-logger-box .simple-logger-list {\n    position: absolute;\n    z-index: 2147483647;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 80%;\n    background-color: rgba(0, 0, 0, 0.8);\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    overflow: auto;\n    -webkit-overflow-scrolling: touch;\n    -webkit-transition: -webkit-transform 400ms ease;\n    transition: -webkit-transform 400ms ease;\n    transition: transform 400ms ease;\n    transition: transform 400ms ease, -webkit-transform 400ms ease;\n    -webkit-transform: translate3d(0, -100%, 0);\n            transform: translate3d(0, -100%, 0); }\n  .simple-logger-box.show .simple-logger-list {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  .simple-logger-box .simple-logger-list {\n    list-style: none;\n    color: #cacaca;\n    text-align: left;\n    word-break: break-all;\n    font-size: 13px;\n    font-family: Consolas, custom-font, sans-serif; }\n    .simple-logger-box .simple-logger-list li {\n      margin: 4px 8px;\n      line-height: 1.5; }\n    .simple-logger-box .simple-logger-list a {\n      color: #ffffff; }\n    .simple-logger-box .simple-logger-list hr {\n      border-color: #cacaca; }\n    .simple-logger-box .simple-logger-list .literal {\n      color: #cacaca; }\n    .simple-logger-box .simple-logger-list .info {\n      color: #74aa04; }\n    .simple-logger-box .simple-logger-list .warn {\n      color: #cccc81; }\n    .simple-logger-box .simple-logger-list .error {\n      color: #a70334; }\n    .simple-logger-box .simple-logger-list .options-confirm {\n      font-style: normal;\n      color: #cacaca; }\n      .simple-logger-box .simple-logger-list .options-confirm .options-link.ok, .simple-logger-box .simple-logger-list .options-confirm .options-link.cancel {\n        color: white; }\n    .simple-logger-box .simple-logger-list .json-holder {\n      font-style: normal; }\n\r\n</style>\r\n<a class=\"simple-logger-btn\"></a>\r\n<div class=\"simple-logger-box\">\r\n    <ul class=\"simple-logger-list\"></ul>\r\n</div>\r\n';
+        tempBox.innerHTML = '<style type=\"text/css\">\r\n    .simple-logger-btn {\n  position: fixed;\n  z-index: 2147483647;\n  top: 40px;\n  left: 80%;\n  width: 25px;\n  height: 25px;\n  background-color: rgba(50, 50, 50, 0.2);\n  border: 5px solid rgba(0, 0, 0, 0.2);\n  border-radius: 10px; }\n\n.simple-logger-box {\n  position: fixed;\n  z-index: 2147483647;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(255, 255, 255, 0.8);\n  -webkit-transition: opacity 400ms ease, visibility 400ms ease;\n  transition: opacity 400ms ease, visibility 400ms ease;\n  opacity: 0;\n  visibility: hidden;\n  -webkit-user-select: text; }\n  .simple-logger-box.show {\n    opacity: 1;\n    visibility: visible; }\n  .simple-logger-box .simple-logger-list {\n    position: absolute;\n    z-index: 2147483647;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 80%;\n    background-color: rgba(0, 0, 0, 0.8);\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n    overflow: auto;\n    -webkit-overflow-scrolling: touch;\n    -webkit-transition: -webkit-transform 400ms ease;\n    transition: -webkit-transform 400ms ease;\n    transition: transform 400ms ease;\n    transition: transform 400ms ease, -webkit-transform 400ms ease;\n    -webkit-transform: translate3d(0, -100%, 0);\n            transform: translate3d(0, -100%, 0); }\n  .simple-logger-box.show .simple-logger-list {\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0); }\n  .simple-logger-box .simple-logger-list {\n    list-style: none;\n    color: #cacaca;\n    text-align: left;\n    word-break: break-all;\n    font-size: 13px;\n    font-family: Consolas, custom-font, sans-serif; }\n    .simple-logger-box .simple-logger-list li {\n      margin: 4px 8px;\n      line-height: 1.5; }\n    .simple-logger-box .simple-logger-list a {\n      color: #ffffff; }\n    .simple-logger-box .simple-logger-list hr {\n      border-color: #cacaca; }\n    .simple-logger-box .simple-logger-list .literal {\n      color: #cacaca; }\n    .simple-logger-box .simple-logger-list .info {\n      color: #74aa04; }\n    .simple-logger-box .simple-logger-list .warn {\n      color: #cccc81; }\n    .simple-logger-box .simple-logger-list .error {\n      color: #a70334; }\n    .simple-logger-box .simple-logger-list .options-confirm {\n      font-style: normal;\n      color: #cacaca; }\n      .simple-logger-box .simple-logger-list .options-confirm .options-link.ok, .simple-logger-box .simple-logger-list .options-confirm .options-link.cancel {\n        color: white; }\n    .simple-logger-box .simple-logger-list .json-holder {\n      font-style: normal; }\n\r\n</style>\r\n<a class=\"simple-logger-btn\"></a>\r\n<div class=\"simple-logger-box\">\r\n    <ul class=\"simple-logger-list\"></ul>\r\n</div>\r\n';
         var elements = [].slice.call(tempBox.children, 0),
             element;
         for (var i = 0; element = elements[i]; i++) {
@@ -44,9 +44,11 @@ var Delayer = require('./simple-logger/delayer.js'),
         });
         Logger.bindConsole(window._console);
         Logger.expand = function () {
+            Logger._autoFocus = true;
             box.classList.add('show');
         };
         Logger.collapse = function () {
+            Logger._autoFocus = false;
             box.classList.remove('show');
         };
         Logger.hideBtn = function () {
@@ -564,6 +566,7 @@ var Logger = {
     nextId: null,
     _console: null,
     _allowHtml: false,
+    _autoFocus: false,
     allowHtml: function () {
         this._allowHtml = true;
         this.jsonViewer.allowHtml();
@@ -640,7 +643,7 @@ var Logger = {
         if (!existed) {
             li.id = nextId;
             logList.appendChild(li);
-            window.setTimeout(function () {
+            this._autoFocus && window.setTimeout(function () {
                 li.scrollIntoView();
                 li = null;
             }, 10);

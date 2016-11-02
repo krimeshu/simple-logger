@@ -19,7 +19,8 @@
   background-color: rgba(255, 255, 255, 0.8);
   transition: opacity 400ms ease, visibility 400ms ease;
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+  -webkit-user-select: text; }
   .simple-logger-box.show {
     opacity: 1;
     visibility: visible; }
