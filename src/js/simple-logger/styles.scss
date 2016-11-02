@@ -23,6 +23,7 @@
   transition: opacity 400ms ease, visibility 400ms ease;
   opacity: 0;
   visibility: hidden;
+  -webkit-user-select: text;
 
   &.show {
     opacity: 1;

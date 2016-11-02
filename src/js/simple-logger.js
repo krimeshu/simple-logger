@@ -45,9 +45,11 @@ var Delayer = require('./simple-logger/delayer.js'),
         });
         Logger.bindConsole(window._console);
         Logger.expand = function () {
+            Logger._autoFocus = true;
             box.classList.add('show');
         };
         Logger.collapse = function () {
+            Logger._autoFocus = false;
             box.classList.remove('show');
         };
         Logger.hideBtn = function () {

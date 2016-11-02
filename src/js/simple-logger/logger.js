@@ -10,6 +10,7 @@ var Logger = {
     nextId: null,
     _console: null,
     _allowHtml: false,
+    _autoFocus: false,
     allowHtml: function () {
         this._allowHtml = true;
         this.jsonViewer.allowHtml();
@@ -86,7 +87,7 @@ var Logger = {
         if (!existed) {
             li.id = nextId;
             logList.appendChild(li);
-            window.setTimeout(function () {
+            this._autoFocus && window.setTimeout(function () {
                 li.scrollIntoView();
                 li = null;
             }, 10);
