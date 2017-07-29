@@ -47,7 +47,7 @@
     text-align: left;
     word-break: break-all;
     font-size: 13px;
-    font-family: Consolas, custom-font, sans-serif; }
+    font-family: Consolas, custom-font, sans-serif; }
     .simple-logger-box .simple-logger-list li {
       margin: 4px 8px;
       line-height: 1.5; }
@@ -61,7 +61,8 @@
       color: #74aa04; }
     .simple-logger-box .simple-logger-list .warn {
       color: #cccc81; }
-    .simple-logger-box .simple-logger-list .error {
+    .simple-logger-box .simple-logger-list .error,
+    .simple-logger-box .simple-logger-list .error .json-viewer-key {
       color: #a70334; }
     .simple-logger-box .simple-logger-list .options-confirm {
       font-style: normal;

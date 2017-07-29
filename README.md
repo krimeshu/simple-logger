@@ -1,6 +1,6 @@
 # Simple Logger
 
-> Version: 3.1
+> Version: 3.3
 
 ## 说明
 
@@ -16,9 +16,22 @@
 
 ![效果图](https://github.com/Moonshell/simple-logger/blob/master/preview.png?raw=true)
 
-## 附：
+## `SimpleLogger.tryCatch(callback)`
 
-正式环境下屏蔽呼出按键的方式，只需要在引入js文件后，判断环境再调用`SimpleLogger.hideBtn()`即可，例子：
+### `callback` : `Function` - 需要捕获的函数
+
+特殊异常捕获。用于打包代码内，根据`sourcemap`分析具体的报错`stack`。
+
+```javascript
+    SimpleLogger.tryCatch(() => {
+        throw new Error('Some error, maybe in bundled script.');
+    });
+```
+
+
+## `SimpleLogger.hideBtn()`
+
+隐藏日志操作按键，例子：
 
 ```html
 <!DOCTYPE html>
@@ -36,6 +49,10 @@
 （可作为防止发布正式环境时忘撤js文件的备选方案，当然，能做到的话，还是在正式环境的html中排除调试用的js文件比较好）
 
 ## 更新内容
+
+### `3.3.1`
+
+* 增加打包局部作用域下异常监听的 tryCatch 函数。
 
 
 ### `3.1.1`

@@ -2,8 +2,7 @@
   position: fixed;
   z-index: 2147483647;
   top: 40px;
-  left: 80%;
-  //right: 40px;
+  left: 80%; //right: 40px;
   width: 25px;
   height: 25px;
   background-color: rgba(50, 50, 50, .2);
@@ -19,17 +18,14 @@
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, .8);
-
   transition: opacity 400ms ease, visibility 400ms ease;
   opacity: 0;
   visibility: hidden;
   -webkit-user-select: text;
-
   &.show {
     opacity: 1;
     visibility: visible;
   }
-
   .simple-logger-list {
     position: absolute;
     z-index: 2147483647;
@@ -38,72 +34,63 @@
     width: 100%;
     height: 80%;
     background-color: rgba(0, 0, 0, .8);
-
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-
     transition: transform 400ms ease;
     transform: translate3d(0, -100%, 0);
   }
-
   &.show {
     .simple-logger-list {
       transform: translate3d(0, 0, 0);
     }
   }
-
   .simple-logger-list {
     list-style: none;
     color: #cacaca;
     text-align: left;
-
     li {
       margin: 4px 8px;
       line-height: 1.5;
     }
-
     a {
       color: #ffffff;
     }
-
     hr {
       border-color: #cacaca;
     }
-
     .literal {
       color: #cacaca;
     }
-
     .info {
       color: #74aa04;
     }
-
     .warn {
       color: #cccc81;
     }
-
     .error {
-      color: #a70334;
+      &,
+      .json-viewer-key {
+        color: #a70334;
+      }
     }
-
     word-break: break-all;
     font-size: 13px;
-    font-family: Consolas, custom-font, sans-serif;
-
+    font-family: Consolas,
+    custom-font,
+    sans-serif;
     .options-confirm {
       font-style: normal;
       color: #cacaca;
-
       .options-link {
-        &.ok, &.cancel {
+        &.ok,
+        &.cancel {
           color: white;
         }
       }
     }
-
     .json-holder {
       font-style: normal;
     }

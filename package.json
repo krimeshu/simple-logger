@@ -19,7 +19,6 @@
       "replace_const",
       "prefix_crafter",
       "join_include",
-      "find_bundle_entry",
       "rollup_bundle",
       "do_dist"
     ],
@@ -29,14 +28,14 @@
     "postprocessing": "function postprocessing(console, distDir) {\n    console.log('项目输出目录：', distDir);\n    // console.log('其它可用参数：', this.queryAvailableArguments().join(', '));\n    // Todo: do something after build.\n}",
     "keepOldCopy": false,
     "jsOpt": {
-      "bundleEntry": ""
+      "bundleEntry": "js/simple-logger.js\njs/test/bundle-error.js"
     },
     "ruOpt": {
       "plugins": {
         "nodeResolve": true,
         "commonJS": true,
         "babel": true,
-        "vue": false,
+        "vue": true,
         "postcssModules": false,
         "uglify": false
       },

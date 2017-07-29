@@ -7,7 +7,9 @@ var Delayer = require('./simple-logger/delayer.js'),
     Logger = require('./simple-logger/logger.js'),
     DragOrClick = require('./simple-logger/drag-or-click.js');
 
-var { mapStackTrace } = require('./lib/sourcemapped-stacktrace.js');
+var {
+    mapStackTrace
+} = require('./lib/sourcemapped-stacktrace.js');
 
 (function () {
 
@@ -28,7 +30,8 @@ var { mapStackTrace } = require('./lib/sourcemapped-stacktrace.js');
             'log', 'info', 'warn', 'error',
             'clear', 'useId', 'genUniqueId',
             'expand', 'collapse', 'hideBtn', 'showBtn',
-            'allowHtml', 'preventHtml'
+            'allowHtml', 'preventHtml',
+            'tryCatch'
         ]);
     }
 
@@ -58,6 +61,14 @@ var { mapStackTrace } = require('./lib/sourcemapped-stacktrace.js');
         Logger.showBtn = function () {
             btn.style.display = 'block';
         };
+        Logger.tryCatch = function (func, thisObj, args) {
+            try {
+                if (!thisObj) func();
+                else func.apply(thisObj, args || []);
+            } catch (error) {
+                handleError(error);
+            }
+        };
 
         var btnDOC = new DragOrClick(btn);
         btnDOC.on('click', function () {
@@ -72,7 +83,7 @@ var { mapStackTrace } = require('./lib/sourcemapped-stacktrace.js');
             touchPos.x -= scrollLeft;
             touchPos.y -= scrollTop;
             if (touchPos && (touchPos.x < listRect.left || touchPos.x > listRect.right ||
-                touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
+                    touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
                 SimpleLogger.collapse();
             }
             e.stopPropagation();
@@ -82,13 +93,25 @@ var { mapStackTrace } = require('./lib/sourcemapped-stacktrace.js');
         window.console = window.SimpleLogger = Logger;
     }
 
-    function listenToError() {
-        window.addEventListener('error', function (error) {
+    function handleError(error) {
+        window._console.log('error:', arguments);
+        if (error.stack) {
             mapStackTrace(error.stack, function (mappedStack) {
-                SimpleLogger.error(e.message + "\n" +
-                    mappedStack.join("\n"));
+                SimpleLogger.error('Error:', {
+                    message: error.message,
+                    stack: mappedStack
+                });
             });
-        });
+        } else {
+            SimpleLogger.error('Error:', {
+                message: error.message,
+                stack: 'miss catched, try wrap your code into SimpleLogger.tryCatch'
+            });
+        }
+    }
+
+    function listenToError() {
+        window.addEventListener('error', handleError);
     }
 
     document.addEventListener('DOMContentLoaded', function () {
