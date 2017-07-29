@@ -3,8 +3,9 @@ var simpleLogger = (function () {
 
 /**
  * Created by krimeshu on 2016/6/20.
+ * Version: 3.3.1
+ * Last Modify: 2016/8/19
  */
-
 var Delayer = {
     _waitingQueue: [],
     _makeFunc: function _makeFunc(funcName) {
@@ -37,13 +38,6 @@ var Delayer = {
 };
 
 var delayer = Delayer;
-
-
-
-var delayer$2 = Object.freeze({
-	default: delayer,
-	__moduleExports: delayer
-});
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -340,6 +334,11 @@ var jsonViewer$2 = Object.freeze({
 
 var JSONViewer = ( jsonViewer$2 && jsonViewer ) || jsonViewer$2;
 
+/**
+ * Created by krimeshu on 2016/6/20.
+ * Version: 3.3.1
+ * Last Modify: 2016/8/19
+ */
 var styleText = '.json-viewer-row {\r\n    cursor: default;\r\n    color: #545353;\r\n    margin: 2px 0;\r\n}\r\n\r\n.json-viewer-ellipsis {\r\n    background: #C0C0C0;\r\n    padding: 0 6px;\r\n    margin: 0 2px;\r\n    border-radius: 3px;\r\n}\r\n\r\n.json-viewer-array-members.collapsed,\r\n.json-viewer-after-array-members.collapsed,\r\n.json-viewer-object-members.collapsed,\r\n.json-viewer-after-object-members.collapsed {\r\n    display: none;\r\n}\r\n\r\n.json-viewer-bracket, .json-viewer-colon, .json-viewer-comma {\r\n    margin: 0 2px;\r\n}\r\n\r\n.json-viewer-row .json-viewer-collapse-tag {\r\n    display: none;\r\n}\r\n\r\n.json-viewer-row.collapsed .json-viewer-collapse-tag {\r\n    display: inline;\r\n}\r\n\r\n.json-viewer-row.empty .json-viewer-collapse-tag.json-viewer-ellipsis {\r\n    display: none;\r\n}\r\n\r\n.json-viewer-row.empty .json-viewer-collapse-tag.json-viewer-bracket {\r\n    display: inline;\r\n}\r\n\r\n.json-viewer-bracket,\r\n.json-viewer-key,\r\n.json-viewer-colon,\r\n.json-viewer-comma,\r\n.json-viewer-string,\r\n.json-viewer-number,\r\n.json-viewer-boolean,\r\n.json-viewer-null,\r\n.json-viewer-undefined,\r\n.json-viewer-stream {\r\n    display: inline;\r\n}\r\n\r\n.json-viewer-key, .json-viewer-string {\r\n    color: #036A07;\r\n}\r\n\r\n.json-viewer-number {\r\n    color: #0000CD;\r\n}\r\n\r\n.json-viewer-boolean, .json-viewer-null, .json-viewer-undefined {\r\n    color: #585CF6;\r\n}\r\n\r\n.json-viewer-stream {\r\n    background: #C0C0C0;\r\n    padding: 0 6px;\r\n    margin: 0 2px;\r\n    border-radius: 3px;\r\n}\r\n\r\n/****************************************/\r\n\r\n.json-viewer-row.theme-dark {\r\n    color: #DEDEDE;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-ellipsis {\r\n    background: #666666;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-key {\r\n    color: #74AA04;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-string {\r\n    color: #CCCC81;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-number {\r\n    color: #4178B3;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-boolean,\r\n.json-viewer-row.theme-dark .json-viewer-null,\r\n.json-viewer-row.theme-dark .json-viewer-undefined {\r\n    color: #CC7832;\r\n}\r\n\r\n.json-viewer-stream {\r\n    background: #666666;\r\n}\r\n';
 
 var Logger = {
@@ -525,17 +524,11 @@ var Logger = {
 
 var logger = Logger;
 
-
-
-var logger$2 = Object.freeze({
-	default: logger,
-	__moduleExports: logger
-});
-
 /**
  * Created by krimeshu on 2016/6/20.
+ * Version: 3.3.1
+ * Last Modify: 2016/8/19
  */
-
 var DragOrClick = function DragOrClick(obj) {
     var _this = this;
     obj.addEventListener('touchstart', function (e) {
@@ -662,13 +655,6 @@ DragOrClick.prototype.trigger = function (type, e) {
 };
 
 var dragOrClick = DragOrClick;
-
-
-
-var dragOrClick$2 = Object.freeze({
-	default: dragOrClick,
-	__moduleExports: dragOrClick
-});
 
 var sourcemappedStacktrace = createCommonjsModule(function (module, exports) {
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -2988,19 +2974,7 @@ var sourcemappedStacktrace$2 = Object.freeze({
 	__moduleExports: sourcemappedStacktrace
 });
 
-var Delayer$1 = ( delayer$2 && delayer ) || delayer$2;
-
-var Logger$1 = ( logger$2 && logger ) || logger$2;
-
-var DragOrClick$1 = ( dragOrClick$2 && dragOrClick ) || dragOrClick$2;
-
 var require$$0 = ( sourcemappedStacktrace$2 && sourcemappedStacktrace ) || sourcemappedStacktrace$2;
-
-/**
- * Created by krimeshu on 2016/6/20.
- * Version: 3.3.0
- * Last Modify: 2016/8/19
- */
 
 var mapStackTrace = require$$0.mapStackTrace;
 
@@ -3020,36 +2994,36 @@ var mapStackTrace = require$$0.mapStackTrace;
     }
 
     function initLoggerDelayer() {
-        window.console = window.SimpleLogger = Delayer$1.create(['log', 'info', 'warn', 'error', 'clear', 'useId', 'genUniqueId', 'expand', 'collapse', 'hideBtn', 'showBtn', 'allowHtml', 'preventHtml', 'tryCatch']);
+        window.console = window.SimpleLogger = delayer.create(['log', 'info', 'warn', 'error', 'clear', 'useId', 'genUniqueId', 'expand', 'collapse', 'hideBtn', 'showBtn', 'allowHtml', 'preventHtml', 'tryCatch']);
     }
 
     function initLogger() {
         var box = document.querySelector('.simple-logger-box'),
             list = box.querySelector('.simple-logger-list'),
             btn = document.querySelector('.simple-logger-btn');
-        Logger$1._init({
+        logger._init({
             logList: list,
             eventHandler: list,
             indentSize: 16,
             expand: 1,
             theme: 'dark'
         });
-        Logger$1.bindConsole(window._console);
-        Logger$1.expand = function () {
-            Logger$1._autoFocus = true;
+        logger.bindConsole(window._console);
+        logger.expand = function () {
+            logger._autoFocus = true;
             box.classList.add('show');
         };
-        Logger$1.collapse = function () {
-            Logger$1._autoFocus = false;
+        logger.collapse = function () {
+            logger._autoFocus = false;
             box.classList.remove('show');
         };
-        Logger$1.hideBtn = function () {
+        logger.hideBtn = function () {
             btn.style.display = 'none';
         };
-        Logger$1.showBtn = function () {
+        logger.showBtn = function () {
             btn.style.display = 'block';
         };
-        Logger$1.tryCatch = function (func, thisObj, args) {
+        logger.tryCatch = function (func, thisObj, args) {
             try {
                 if (!thisObj) func();else func.apply(thisObj, args || []);
             } catch (error) {
@@ -3057,7 +3031,7 @@ var mapStackTrace = require$$0.mapStackTrace;
             }
         };
 
-        var btnDOC = new DragOrClick$1(btn);
+        var btnDOC = new dragOrClick(btn);
         btnDOC.on('click', function () {
             SimpleLogger.expand();
         });
@@ -3066,7 +3040,7 @@ var mapStackTrace = require$$0.mapStackTrace;
             var listRect = list.getBoundingClientRect(),
                 scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
                 scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-            var touchPos = DragOrClick$1.getTouchPos(e);
+            var touchPos = dragOrClick.getTouchPos(e);
             touchPos.x -= scrollLeft;
             touchPos.y -= scrollTop;
             if (touchPos && (touchPos.x < listRect.left || touchPos.x > listRect.right || touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
@@ -3074,24 +3048,24 @@ var mapStackTrace = require$$0.mapStackTrace;
             }
             e.stopPropagation();
         });
-        Delayer$1.execQueue(Logger$1);
-        Delayer$1.clearQueue();
-        window.console = window.SimpleLogger = Logger$1;
+        delayer.execQueue(logger);
+        delayer.clearQueue();
+        window.console = window.SimpleLogger = logger;
     }
 
     function handleError(error) {
         window._console.log('error:', arguments);
         if (error.stack) {
             mapStackTrace(error.stack, function (mappedStack) {
-                SimpleLogger.error({
+                SimpleLogger.error('Error:', {
                     message: error.message,
-                    stack: mappedStack
+                    stack: ['\n' + mappedStack.join('\n') + '\n']
                 });
             });
         } else {
-            SimpleLogger.error({
+            SimpleLogger.error('Error:', {
                 message: error.message,
-                stack: 'miss catched, try wrap your code into SimpleLogger.tryCatch(function () { /* Todo sth. */ })'
+                stack: 'miss catched, try wrap your code into SimpleLogger.tryCatch'
             });
         }
     }

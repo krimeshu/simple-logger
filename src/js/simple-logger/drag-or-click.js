@@ -1,7 +1,8 @@
 /**
  * Created by krimeshu on 2016/6/20.
+ * Version: {VERSION}
+ * Last Modify: 2016/8/19
  */
-
 var DragOrClick = function (obj) {
     var _this = this;
     obj.addEventListener('touchstart', function (e) {

@@ -99,7 +99,7 @@ var {
             mapStackTrace(error.stack, function (mappedStack) {
                 SimpleLogger.error('Error:', {
                     message: error.message,
-                    stack: mappedStack
+                    stack: ['\n' + mappedStack.join('\n') + '\n']
                 });
             });
         } else {
