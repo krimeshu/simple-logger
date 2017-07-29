@@ -48,9 +48,9 @@
             ]
         });
         console.log('%c', 'display: block; border-top: 1px solid #999;');
-        (function () {
-            throw new Error('发生了一些错误。');
-        })();
+        // (function () {
+        //     throw new Error('发生了一些错误。');
+        // })();
     </script>
 </head>
 <body>
@@ -85,5 +85,9 @@
 <p>May you lovers eventually become spouses!</p>
 <p>May you enjoy happiness in this earthly world!</p>
 <p>I only wish to face the sea, with spring blossoms.</p>
+<p>
+    <script src="js/babel-error.js"></script>
+    <button onclick="window.throwBabelError();">Throw Error in babeled script</button>
+</p>
 </body>
 </html>

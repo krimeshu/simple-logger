@@ -1,11 +1,12 @@
 {
   "name": "simple-logger",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "fcOpt": {
     "scOpt": {},
     "pcOpt": {},
     "alOpt": {
-      "allot": false
+      "allot": false,
+      "hashLink": "NO_HASH"
     },
     "upOpt": {
       "delta": true,
@@ -18,14 +19,33 @@
       "replace_const",
       "prefix_crafter",
       "join_include",
-      "run_browserify",
+      "find_bundle_entry",
+      "rollup_bundle",
       "do_dist"
     ],
     "innerSrcDir": "src",
     "innerDistDir": "dist",
     "preprocessing": "function preprocessing(console, buildDir) {\n    console.log('项目构建目录：', buildDir);\n    // console.log('其它可用参数：', this.queryAvailableArguments().join(', '));\n    // Todo: do something before build.\n}",
     "postprocessing": "function postprocessing(console, distDir) {\n    console.log('项目输出目录：', distDir);\n    // console.log('其它可用参数：', this.queryAvailableArguments().join(', '));\n    // Todo: do something after build.\n}",
-    "keepOldCopy": false
+    "keepOldCopy": false,
+    "jsOpt": {
+      "bundleEntry": ""
+    },
+    "ruOpt": {
+      "plugins": {
+        "nodeResolve": true,
+        "commonJS": true,
+        "babel": true,
+        "vue": false,
+        "postcssModules": false,
+        "uglify": false
+      },
+      "format": "iife"
+    },
+    "smOpt": {
+      "mappingUrl": "/*\n    传给 gulp-sourcemaps 插件 write 参数中的 \n        sourceMappingURL 字段\n */\nfunction mappingUrl(file) {\n    // return 'http://asset-host.example.com/' + file.relative + '.map';\n    return require('path').basename(file.path) + '.map';\n}",
+      "enable": true
+    }
   },
   "watchToRebuilding": false
 }

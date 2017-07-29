@@ -2,8 +2,8 @@
  * Created by krimeshu on 2016/6/20.
  */
 
-var JSONViewer = require('./json-viewer/json-viewer.js'),
-    styleText = '#include("./json-viewer/json-viewer.css", {"_inlineString": true})';
+var JSONViewer = require('../lib/json-viewer/json-viewer.js'),
+    styleText = '#include("../lib/json-viewer/json-viewer.css", {"_inlineString": true})';
 
 var Logger = {
     logList: null,

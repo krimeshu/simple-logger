@@ -1,5 +1,3 @@
-'browserify entry';
-
 /**
  * Created by krimeshu on 2016/6/20.
  * Version: {VERSION}
@@ -8,6 +6,8 @@
 var Delayer = require('./simple-logger/delayer.js'),
     Logger = require('./simple-logger/logger.js'),
     DragOrClick = require('./simple-logger/drag-or-click.js');
+
+var { mapStackTrace } = require('./lib/sourcemapped-stacktrace.js');
 
 (function () {
 
@@ -84,20 +84,10 @@ var Delayer = require('./simple-logger/delayer.js'),
 
     function listenToError() {
         window.addEventListener('error', function (error) {
-            var line = error ['lineno'];
-            var file = error['filename'];
-            var posStr = '([unknown_file]: ' + line + ')';
-            if (file) {
-                file = file.substring(0, ((file.indexOf('?') + 1) || (file.indexOf('#') + 1) || (file.length + 1)) - 1);
-                var page = window.location.href;
-                page = page.substring(0, ((page.indexOf('?') + 1) || (page.indexOf('#') + 1) || (page.length + 1)) - 1);
-                var path = page.substring(0, page.lastIndexOf('/') + 1);
-                if (file.indexOf(path) == 0) {
-                    file = file.length > path.length ? file.substring(path.length) : '[index_file]';
-                }
-                posStr = !file ? posStr : '(' + file + ': ' + line + ')';
-            }
-            SimpleLogger.error('%s%c%s', error['message'], 'color: #999;', posStr);
+            mapStackTrace(error.stack, function (mappedStack) {
+                SimpleLogger.error(e.message + "\n" +
+                    mappedStack.join("\n"));
+            });
         });
     }
 
