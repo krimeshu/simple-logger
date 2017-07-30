@@ -3,7 +3,7 @@ var simpleLogger = (function () {
 
 /**
  * Created by krimeshu on 2016/6/20.
- * Version: 3.3.1
+ * Version: 3.3.2
  * Last Modify: 2016/8/19
  */
 var Delayer = {
@@ -336,7 +336,7 @@ var JSONViewer = ( jsonViewer$2 && jsonViewer ) || jsonViewer$2;
 
 /**
  * Created by krimeshu on 2016/6/20.
- * Version: 3.3.1
+ * Version: 3.3.2
  * Last Modify: 2016/8/19
  */
 var styleText = '.json-viewer-row {\r\n    cursor: default;\r\n    color: #545353;\r\n    margin: 2px 0;\r\n}\r\n\r\n.json-viewer-ellipsis {\r\n    background: #C0C0C0;\r\n    padding: 0 6px;\r\n    margin: 0 2px;\r\n    border-radius: 3px;\r\n}\r\n\r\n.json-viewer-array-members.collapsed,\r\n.json-viewer-after-array-members.collapsed,\r\n.json-viewer-object-members.collapsed,\r\n.json-viewer-after-object-members.collapsed {\r\n    display: none;\r\n}\r\n\r\n.json-viewer-bracket, .json-viewer-colon, .json-viewer-comma {\r\n    margin: 0 2px;\r\n}\r\n\r\n.json-viewer-row .json-viewer-collapse-tag {\r\n    display: none;\r\n}\r\n\r\n.json-viewer-row.collapsed .json-viewer-collapse-tag {\r\n    display: inline;\r\n}\r\n\r\n.json-viewer-row.empty .json-viewer-collapse-tag.json-viewer-ellipsis {\r\n    display: none;\r\n}\r\n\r\n.json-viewer-row.empty .json-viewer-collapse-tag.json-viewer-bracket {\r\n    display: inline;\r\n}\r\n\r\n.json-viewer-bracket,\r\n.json-viewer-key,\r\n.json-viewer-colon,\r\n.json-viewer-comma,\r\n.json-viewer-string,\r\n.json-viewer-number,\r\n.json-viewer-boolean,\r\n.json-viewer-null,\r\n.json-viewer-undefined,\r\n.json-viewer-stream {\r\n    display: inline;\r\n}\r\n\r\n.json-viewer-key, .json-viewer-string {\r\n    color: #036A07;\r\n}\r\n\r\n.json-viewer-number {\r\n    color: #0000CD;\r\n}\r\n\r\n.json-viewer-boolean, .json-viewer-null, .json-viewer-undefined {\r\n    color: #585CF6;\r\n}\r\n\r\n.json-viewer-stream {\r\n    background: #C0C0C0;\r\n    padding: 0 6px;\r\n    margin: 0 2px;\r\n    border-radius: 3px;\r\n}\r\n\r\n/****************************************/\r\n\r\n.json-viewer-row.theme-dark {\r\n    color: #DEDEDE;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-ellipsis {\r\n    background: #666666;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-key {\r\n    color: #74AA04;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-string {\r\n    color: #CCCC81;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-number {\r\n    color: #4178B3;\r\n}\r\n\r\n.json-viewer-row.theme-dark .json-viewer-boolean,\r\n.json-viewer-row.theme-dark .json-viewer-null,\r\n.json-viewer-row.theme-dark .json-viewer-undefined {\r\n    color: #CC7832;\r\n}\r\n\r\n.json-viewer-stream {\r\n    background: #666666;\r\n}\r\n';
@@ -526,7 +526,7 @@ var logger = Logger;
 
 /**
  * Created by krimeshu on 2016/6/20.
- * Version: 3.3.1
+ * Version: 3.3.2
  * Last Modify: 2016/8/19
  */
 var DragOrClick = function DragOrClick(obj) {
@@ -2976,6 +2976,12 @@ var sourcemappedStacktrace$2 = Object.freeze({
 
 var require$$0 = ( sourcemappedStacktrace$2 && sourcemappedStacktrace ) || sourcemappedStacktrace$2;
 
+/**
+ * Created by krimeshu on 2016/6/20.
+ * Version: 3.3.2
+ * Last Modify: 2016/8/19
+ */
+
 var mapStackTrace = require$$0.mapStackTrace;
 
 
@@ -2994,7 +3000,7 @@ var mapStackTrace = require$$0.mapStackTrace;
     }
 
     function initLoggerDelayer() {
-        window.console = window.SimpleLogger = delayer.create(['log', 'info', 'warn', 'error', 'clear', 'useId', 'genUniqueId', 'expand', 'collapse', 'hideBtn', 'showBtn', 'allowHtml', 'preventHtml', 'tryCatch']);
+        window.console = window.SimpleLogger = delayer.create(['log', 'info', 'warn', 'error', 'clear', 'useId', 'genUniqueId', 'expand', 'collapse', 'hideBtn', 'showBtn', 'allowHtml', 'preventHtml', 'tryCatch', 'handlerError']);
     }
 
     function initLogger() {
@@ -3025,11 +3031,12 @@ var mapStackTrace = require$$0.mapStackTrace;
         };
         logger.tryCatch = function (func, thisObj, args) {
             try {
-                if (!thisObj) func();else func.apply(thisObj, args || []);
+                if (!thisObj) return func();else return func.apply(thisObj, args || []);
             } catch (error) {
                 handleError(error);
             }
         };
+        logger.handleError = handleError;
 
         var btnDOC = new dragOrClick(btn);
         btnDOC.on('click', function () {
@@ -3054,7 +3061,6 @@ var mapStackTrace = require$$0.mapStackTrace;
     }
 
     function handleError(error) {
-        window._console.log('error:', arguments);
         if (error.stack) {
             mapStackTrace(error.stack, function (mappedStack) {
                 SimpleLogger.error('Error:', {
@@ -3065,7 +3071,7 @@ var mapStackTrace = require$$0.mapStackTrace;
         } else {
             SimpleLogger.error('Error:', {
                 message: error.message,
-                stack: 'miss catched, try wrap your code into SimpleLogger.tryCatch'
+                stack: 'Capture missed, try wrap the code into \'SimpleLogger.tryCatch\' for detail.'
             });
         }
     }

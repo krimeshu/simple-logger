@@ -2259,14 +2259,17 @@ var Child = { render: function render() {
     }
 };
 
-SimpleLogger.tryCatch(function () {
-    new Vue({
-        el: '#app',
-        components: {
-            'child': Child
-        },
-        template: '<p>Test: <child/></p>'
-    });
+Vue.config.errorHandler = function (err, vm, info) {
+    alert('Vue errorHandler:', [].splice.call(arguments));
+    SimpleLogger.handleErrror(err);
+};
+
+new Vue({
+    el: '#app',
+    components: {
+        'child': Child
+    },
+    template: '\n        <div>\n            <child></child>\n        </div>\n        '
 });
 
 }());

@@ -31,7 +31,7 @@ var {
             'clear', 'useId', 'genUniqueId',
             'expand', 'collapse', 'hideBtn', 'showBtn',
             'allowHtml', 'preventHtml',
-            'tryCatch'
+            'tryCatch', 'handlerError'
         ]);
     }
 
@@ -63,12 +63,13 @@ var {
         };
         Logger.tryCatch = function (func, thisObj, args) {
             try {
-                if (!thisObj) func();
-                else func.apply(thisObj, args || []);
+                if (!thisObj) return func();
+                else return func.apply(thisObj, args || []);
             } catch (error) {
                 handleError(error);
             }
         };
+        Logger.handleError = handleError;
 
         var btnDOC = new DragOrClick(btn);
         btnDOC.on('click', function () {
@@ -94,7 +95,6 @@ var {
     }
 
     function handleError(error) {
-        window._console.log('error:', arguments);
         if (error.stack) {
             mapStackTrace(error.stack, function (mappedStack) {
                 SimpleLogger.error('Error:', {
@@ -105,7 +105,7 @@ var {
         } else {
             SimpleLogger.error('Error:', {
                 message: error.message,
-                stack: 'miss catched, try wrap your code into SimpleLogger.tryCatch'
+                stack: 'Capture missed, try wrap the code into \'SimpleLogger.tryCatch\' for detail.'
             });
         }
     }

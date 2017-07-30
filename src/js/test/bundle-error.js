@@ -1,12 +1,20 @@
 import Vue from '../lib/vue.min';
 import Child from './child.vue';
 
-SimpleLogger.tryCatch(() => {
-    new Vue({
-        el: '#app',
-        components: {
-            'child': Child
-        },
-        template: '<p>Test: <child/></p>'
-    });
+// Vue's global error capture hook
+Vue.config.errorHandler = function (err, vm, info) {
+    alert('Vue errorHandler:', [].splice.call(arguments));
+    SimpleLogger.handleErrror(err);
+};
+
+new Vue({
+    el: '#app',
+    components: {
+        'child': Child
+    },
+    template: `
+        <div>
+            <child></child>
+        </div>
+        `
 });
