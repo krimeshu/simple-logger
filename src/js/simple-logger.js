@@ -9,7 +9,7 @@ var Delayer = require('./simple-logger/delayer.js'),
 
 var {
     mapStackTrace
-} = require('./lib/sourcemapped-stacktrace.js');
+} = require('./lib/sourcemapped-stacktrace.min.js');
 
 (function () {
 
