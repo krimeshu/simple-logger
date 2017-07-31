@@ -2259,7 +2259,6 @@ var Child = { render: function render() {
     }
 };
 
-// Vue's global error capture hook
 Vue.config.errorHandler = function (err, vm, info) {
     alert('Vue errorHandler:', [].splice.call(arguments));
     SimpleLogger.handleErrror(err);

@@ -7,9 +7,9 @@ var Delayer = require('./simple-logger/delayer.js'),
     Logger = require('./simple-logger/logger.js'),
     DragOrClick = require('./simple-logger/drag-or-click.js');
 
-var {
-    mapStackTrace
-} = require('./lib/sourcemapped-stacktrace.min.js');
+// var {
+//     mapStackTrace
+// } = require('./lib/sourcemapped-stacktrace.min.js');
 
 (function () {
 
@@ -84,7 +84,7 @@ var {
             touchPos.x -= scrollLeft;
             touchPos.y -= scrollTop;
             if (touchPos && (touchPos.x < listRect.left || touchPos.x > listRect.right ||
-                    touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
+                touchPos.y < listRect.top || touchPos.y > listRect.bottom)) {
                 SimpleLogger.collapse();
             }
             e.stopPropagation();
@@ -96,12 +96,17 @@ var {
 
     function handleError(error) {
         if (error.stack) {
-            mapStackTrace(error.stack, function (mappedStack) {
-                SimpleLogger.error('Error:', {
-                    message: error.message,
-                    stack: ['\n' + mappedStack.join('\n') + '\n']
-                });
+            // var isHandled = false;
+            // mapStackTrace(error.stack, function (mappedStack) {
+            // if (isHandled) return;
+            // isHandled = true;
+            // var stack = mappedStack;
+            var stack = error.stack.split(/\n/g);
+            SimpleLogger.error('Error:', {
+                message: error.message,
+                stack: ['\n' + stack.join('\n') + '\n']
             });
+            // });
         } else {
             SimpleLogger.error('Error:', {
                 message: error.message,
